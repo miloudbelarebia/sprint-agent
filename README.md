@@ -2,7 +2,7 @@
 
 **Turn any AI agent into an agile developer.**
 
-Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Aider, Windsurf) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
+Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB.svg)](https://python.org)
@@ -226,6 +226,8 @@ Works with any AI coding agent that reads project files:
 | **GitHub Copilot** | `.github/copilot-instructions.md` | Manual read |
 | **Aider** | `.aider.conf.yml` | Manual read |
 | **Windsurf** | `.windsurfrules` | Auto-read at session start |
+| **OpenAI Codex** | `AGENTS.md` | Auto-read at session start |
+| **Gemini** | — | Tell it: "Read `.sprint/AGENT.md`" |
 | **Any agent** | — | Tell it: "Read `.sprint/AGENT.md`" |
 
 ---
@@ -242,7 +244,7 @@ Initialize `.sprint/` directory with templates and agent config.
 | `--daily <min>` | `30` | Daily session duration (minutes) |
 | `--days <n>` | `5` | Working days per sprint |
 | `--retro-day <day>` | `friday` | Retrospective day |
-| `--agent <type>` | `auto` | `claude` `cursor` `copilot` `aider` `windsurf` |
+| `--agent <type>` | `auto` | `claude` `cursor` `copilot` `codex` `gemini` `aider` `windsurf` |
 | `--force` | — | Overwrite existing `.sprint/` |
 
 ```bash

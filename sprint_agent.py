@@ -268,12 +268,19 @@ Run `sprint-agent status` to see today's context.
 """)
         print(f"{GREEN}✓{RESET} Created CLAUDE.md")
 
-    # .cursorrules
+    # .cursorrules (Cursor)
     if agent in ("auto", "cursor"):
         if not os.path.exists(".cursorrules") or args.force:
             with open(".cursorrules", "w") as f:
                 f.write("Read .sprint/AGENT.md for workflow instructions.\nRead the latest file in .sprint/sprints/ for today's plan.\n")
             print(f"{GREEN}✓{RESET} Created .cursorrules")
+
+    # AGENTS.md (OpenAI Codex)
+    if agent in ("auto", "codex"):
+        if not os.path.exists("AGENTS.md") or args.force:
+            with open("AGENTS.md", "w") as f:
+                f.write("# Agent Instructions\n\nRead `.sprint/AGENT.md` for workflow and project context.\nRead the latest file in `.sprint/sprints/` for today's plan.\n")
+            print(f"{GREEN}✓{RESET} Created AGENTS.md")
 
     # First sprint
     sid = sprint_id(1)
@@ -607,7 +614,7 @@ docs: https://github.com/2pidata/sprint-agent
     p_init.add_argument("--daily", type=int, default=30, help="Daily session duration in minutes (default: 30)")
     p_init.add_argument("--days", type=int, default=5, help="Working days per sprint (default: 5)")
     p_init.add_argument("--retro-day", default="friday", help="Retro day of week (default: friday)")
-    p_init.add_argument("--agent", default="auto", choices=["auto", "claude", "cursor", "copilot", "aider", "windsurf"], help="AI agent type (default: auto)")
+    p_init.add_argument("--agent", default="auto", choices=["auto", "claude", "cursor", "copilot", "codex", "gemini", "aider", "windsurf"], help="AI agent type (default: auto)")
     p_init.add_argument("--force", action="store_true", help="Overwrite existing .sprint/")
 
     # status
