@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sprintkit"
+version = "0.3.0"
+description = "Turn any AI agent into an agile developer. Persistent sprint context for Claude Code, Cursor, Copilot, and more."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Miloud Belarebia", email = "saas@2pidata.fr"},
+]
+keywords = ["ai", "agent", "agile", "sprint", "claude", "cursor", "copilot", "developer-tools", "productivity"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+[project.urls]
+Homepage = "https://github.com/2pidata/sprintkit"
+Repository = "https://github.com/2pidata/sprintkit"
+Issues = "https://github.com/2pidata/sprintkit/issues"
+
+[tool.setuptools]
+py-modules = ["sprintkit"]
+
+[project.scripts]
+sprintkit = "sprintkit:main"
