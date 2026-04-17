@@ -418,6 +418,6 @@ MIT — [2PiData](https://2pidata.fr)
 
 ---
 
-**Built with Sprint Agent by [Miloud Belarebia](https://github.com/databelarebia) — Founder of [2PiData](https://2pidata.fr)**
+**Built with Sprint Agent by [Miloud Belarebia](https://github.com/miloudbelarebia) — Founder of [2PiData](https://2pidata.fr)**
 
 *Tested in production building DataFrancePro: 5M+ company database, 70+ tickets, 6 sprints, one developer + Claude Code.*
