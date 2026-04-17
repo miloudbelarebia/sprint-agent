@@ -1,8 +1,8 @@
-# SprintKit
+# Sprint Agent
 
 **Turn any AI agent into an agile developer.**
 
-SprintKit gives AI coding agents (Claude Code, Cursor, Copilot, Aider) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
+Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Aider) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![npm version](https://img.shields.io/badge/npm-coming_soon-orange.svg)]()
@@ -15,7 +15,7 @@ Every time you start a new session with an AI agent:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                   WITHOUT SprintKit                      │
+│                   WITHOUT Sprint Agent                      │
 │                                                          │
 │  Session 1        Session 2        Session 3             │
 │  ┌──────────┐    ┌──────────┐    ┌──────────┐           │
@@ -41,7 +41,7 @@ Every time you start a new session with an AI agent:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                   WITH SprintKit                         │
+│                   WITH Sprint Agent                         │
 │                                                          │
 │  Session 1        Session 2        Session 3             │
 │  ┌──────────┐    ┌──────────┐    ┌──────────┐           │
@@ -67,9 +67,9 @@ Every time you start a new session with an AI agent:
 ## How It Works
 
 ```
- You                    SprintKit                   AI Agent
+ You                    Sprint Agent                   AI Agent
   │                        │                           │
-  │  npx sprintkit init    │                           │
+  │  sprint-agent init    │                           │
   │───────────────────────>│                           │
   │                        │  Creates:                 │
   │                        │  .sprint/                 │
@@ -104,26 +104,26 @@ Every time you start a new session with an AI agent:
 
 ```bash
 # Initialize with defaults (30min dailies, 5 days/sprint)
-npx sprintkit init
+sprint-agent init
 
 # Or customize everything
-npx sprintkit init --name "My SaaS" --daily 45 --days 4 --agent claude
+sprint-agent init --name "My SaaS" --daily 45 --days 4 --agent claude
 
 # See today's status
-npx sprintkit status
+sprint-agent status
 
 # Create a new sprint with a goal
-npx sprintkit sprint new --goal "Launch MVP"
+sprint-agent sprint new --goal "Launch MVP"
 
 # Add tickets to the backlog
-npx sprintkit backlog add "Fix auth redirect loop" P1 S
-npx sprintkit backlog add "Add E2E tests" P2 L --sprint S03
+sprint-agent backlog add "Fix auth redirect loop" P1 S
+sprint-agent backlog add "Add E2E tests" P2 L --sprint S03
 
 # Generate Friday retro
-npx sprintkit retro
+sprint-agent retro
 
 # Save to git
-npx sprintkit sync
+sprint-agent sync
 ```
 
 After `init`, your project gets a `.sprint/` directory:
@@ -140,7 +140,7 @@ After `init`, your project gets a `.sprint/` directory:
 │   └── ...
 ├── sessions/
 │   └── 2025-01-06.md     ← Session log (auto-updated by agent)
-└── config.yaml           ← SprintKit settings
+└── config.yaml           ← Sprint Agent settings
 ```
 
 ## Why AI Agents Need This
@@ -150,7 +150,7 @@ After `init`, your project gets a `.sprint/` directory:
 AI agents are **stateless by default**. Every new conversation starts from zero.
 
 ```
-Without SprintKit:                With SprintKit:
+Without Sprint Agent:                With Sprint Agent:
 
 "What should I work on?"          Reads .sprint/current-sprint.md
 → Reads 50 files (20 min)         → Knows in 30 seconds:
@@ -164,7 +164,7 @@ Without SprintKit:                With SprintKit:
 
 *Measured on a real project (DataFrancePro, 5M company database, 70+ tickets):*
 
-| What the agent reads | Without SprintKit | With SprintKit |
+| What the agent reads | Without Sprint Agent | With Sprint Agent |
 |---------------------|-------------------|----------------|
 | CLAUDE.md / instructions | 6,200 tokens | 200 tokens (AGENT.md) |
 | Session history (2-3 files) | 5,100 tokens | 0 (in sprint file) |
@@ -175,20 +175,20 @@ Without SprintKit:                With SprintKit:
 
 **Time measured across 10 real sessions:**
 
-| Metric | Without | With SprintKit | Improvement |
+| Metric | Without | With Sprint Agent | Improvement |
 |--------|---------|----------------|-------------|
 | Context loading | 8-15 min | 2 min | **4-7x faster** |
 | Work time per 30min session | 15-22 min | 28 min | **+50%** |
 | Repeated exploration | Every session | Never | Eliminated |
 | "What was I working on?" | Ask + explore | Read sprint file | Instant |
 
-> **Methodology**: Tokens estimated at ~4 bytes/token. Time measured from session start to first productive action (code edit or command). Data from 10 daily sessions on DataFrancePro (April 14-17, 2026). Without = sessions before agile structure. With = sessions after SprintKit setup.
+> **Methodology**: Tokens estimated at ~4 bytes/token. Time measured from session start to first productive action (code edit or command). Data from 10 daily sessions on DataFrancePro (April 14-17, 2026). Without = sessions before agile structure. With = sessions after Sprint Agent setup.
 
 ### Agent Compatibility
 
-SprintKit works with any AI coding agent that reads project files:
+Sprint Agent works with any AI coding agent that reads project files:
 
-| Agent | How it reads SprintKit |
+| Agent | How it reads Sprint Agent |
 |-------|----------------------|
 | **Claude Code** | Auto-reads `CLAUDE.md` → full context |
 | **Cursor** | Reads `.cursorrules` + `.sprint/` |
@@ -199,7 +199,7 @@ SprintKit works with any AI coding agent that reads project files:
 
 ## The Agile Model
 
-SprintKit implements a lightweight agile workflow designed for **solo developers + AI agent** pairs:
+Sprint Agent implements a lightweight agile workflow designed for **solo developers + AI agent** pairs:
 
 ```
 ┌─────────────────── WEEK ────────────────────┐
@@ -286,7 +286,7 @@ This framework was battle-tested building [DataFrancePro](https://datafrancepro.
 
 ## Commands & Parameters
 
-### `sprintkit init [options]`
+### `sprint-agent init [options]`
 
 Scaffolds `.sprint/` directory with all templates.
 
@@ -301,16 +301,16 @@ Scaffolds `.sprint/` directory with all templates.
 
 ```bash
 # Solo dev, short sessions
-npx sprintkit init --daily 20 --days 3
+sprint-agent init --daily 20 --days 3
 
 # Team with Cursor, longer sprints
-npx sprintkit init --name "MyApp" --daily 60 --agent cursor
+sprint-agent init --name "MyApp" --daily 60 --agent cursor
 
 # Weekend warrior
-npx sprintkit init --daily 120 --days 2 --retro-day sunday
+sprint-agent init --daily 120 --days 2 --retro-day sunday
 ```
 
-### `sprintkit sprint new [options]`
+### `sprint-agent sprint new [options]`
 
 Creates next weekly sprint from template.
 
@@ -321,10 +321,10 @@ Creates next weekly sprint from template.
 | `--days <n>` | from config | Override working days |
 
 ```bash
-npx sprintkit sprint new --goal "Launch auth + payment flow"
+sprint-agent sprint new --goal "Launch auth + payment flow"
 ```
 
-### `sprintkit backlog add <description> [options]`
+### `sprint-agent backlog add <description> [options]`
 
 Adds a prioritized ticket to the backlog.
 
@@ -335,20 +335,20 @@ Adds a prioritized ticket to the backlog.
 | `--sprint <id>` | — | Assign to a sprint |
 
 ```bash
-npx sprintkit backlog add "Fix auth redirect loop" P1 S
-npx sprintkit backlog add "Add rate limiting" P2 M --sprint S03
-npx sprintkit backlog add "Security audit" P0 XL
+sprint-agent backlog add "Fix auth redirect loop" P1 S
+sprint-agent backlog add "Add rate limiting" P2 M --sprint S03
+sprint-agent backlog add "Security audit" P0 XL
 ```
 
 ### Other commands
 
 | Command | Description |
 |---------|-------------|
-| `sprintkit status` | Today's date, sprint, progress bar, remaining tickets |
-| `sprintkit backlog list` | Display full backlog |
-| `sprintkit retro` | Generate Friday retrospective template |
-| `sprintkit config` | Show current configuration |
-| `sprintkit sync` | Git commit + push `.sprint/` changes |
+| `sprint-agent status` | Today's date, sprint, progress bar, remaining tickets |
+| `sprint-agent backlog list` | Display full backlog |
+| `sprint-agent retro` | Generate Friday retrospective template |
+| `sprint-agent config` | Show current configuration |
+| `sprint-agent sync` | Git commit + push `.sprint/` changes |
 
 ## What Gets Generated
 
@@ -358,7 +358,7 @@ npx sprintkit backlog add "Security audit" P0 XL
 # Project — AI Agent Instructions
 
 ## Your workflow
-1. Run `sprintkit status` to see today's context
+1. Run `sprint-agent status` to see today's context
 2. Read `.sprint/sprints/current.md` for this week's plan
 3. Pick the next TODO ticket
 4. Work for 25 minutes
@@ -399,15 +399,15 @@ npx sprintkit backlog add "Security audit" P0 XL
 2. **Convention over configuration** — Opinionated defaults. Override only what you need.
 3. **Agent-first** — Designed to be read by AI, not just humans.
 4. **Git-native** — Sprint history is version-controlled. Diffs show progress.
-5. **Zero dependencies at runtime** — Your sprint files work without SprintKit installed.
+5. **Zero dependencies at runtime** — Your sprint files work without Sprint Agent installed.
 
 ## Contributing
 
-SprintKit is open source (MIT). Contributions welcome.
+Sprint Agent is open source (MIT). Contributions welcome.
 
 ```bash
-git clone https://github.com/2pidata/sprintkit
-cd sprintkit
+git clone https://github.com/2pidata/sprint-agent
+cd sprint-agent
 npm install
 npm test
 ```
@@ -418,6 +418,6 @@ MIT — [2PiData](https://2pidata.fr)
 
 ---
 
-**Built with SprintKit by [Miloud Belarebia](https://github.com/databelarebia) — Founder of [2PiData](https://2pidata.fr)**
+**Built with Sprint Agent by [Miloud Belarebia](https://github.com/databelarebia) — Founder of [2PiData](https://2pidata.fr)**
 
 *Tested in production building DataFrancePro: 5M+ company database, 70+ tickets, 6 sprints, one developer + Claude Code.*

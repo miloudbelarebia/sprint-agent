@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sprintkit"
+name = "sprint-agent"
 version = "0.3.0"
 description = "Turn any AI agent into an agile developer. Persistent sprint context for Claude Code, Cursor, Copilot, and more."
 readme = "README.md"
@@ -23,12 +23,13 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/2pidata/sprintkit"
-Repository = "https://github.com/2pidata/sprintkit"
-Issues = "https://github.com/2pidata/sprintkit/issues"
+Homepage = "https://github.com/2pidata/sprint-agent"
+Repository = "https://github.com/2pidata/sprint-agent"
+Issues = "https://github.com/2pidata/sprint-agent/issues"
 
 [tool.setuptools]
 py-modules = ["sprintkit"]
 
 [project.scripts]
+sprint-agent = "sprintkit:main"
 sprintkit = "sprintkit:main"
