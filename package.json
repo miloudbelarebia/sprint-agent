@@ -1,0 +1,38 @@
+{
+  "name": "sprintkit",
+  "version": "0.1.0",
+  "description": "Turn any AI agent into an agile developer. Persistent sprint context for Claude Code, Cursor, Copilot, and more.",
+  "main": "bin/sprintkit.js",
+  "bin": {
+    "sprintkit": "./bin/sprintkit.js"
+  },
+  "scripts": {
+    "test": "node bin/sprintkit.js status"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "agile",
+    "sprint",
+    "claude",
+    "cursor",
+    "copilot",
+    "developer-tools",
+    "productivity",
+    "project-management",
+    "cli"
+  ],
+  "author": "Miloud Belarebia <saas@2pidata.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2pidata/sprintkit.git"
+  },
+  "homepage": "https://github.com/2pidata/sprintkit#readme",
+  "bugs": {
+    "url": "https://github.com/2pidata/sprintkit/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
