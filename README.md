@@ -103,20 +103,27 @@ Every time you start a new session with an AI agent:
 ## Quick Start
 
 ```bash
-# Initialize SprintKit in your project
+# Initialize with defaults (30min dailies, 5 days/sprint)
 npx sprintkit init
+
+# Or customize everything
+npx sprintkit init --name "My SaaS" --daily 45 --days 4 --agent claude
 
 # See today's status
 npx sprintkit status
 
-# Create a new sprint
-npx sprintkit sprint new
+# Create a new sprint with a goal
+npx sprintkit sprint new --goal "Launch MVP"
 
-# Add a ticket to the backlog
-npx sprintkit backlog add "Fix auth redirect loop" --priority P1
+# Add tickets to the backlog
+npx sprintkit backlog add "Fix auth redirect loop" P1 S
+npx sprintkit backlog add "Add E2E tests" P2 L --sprint S03
 
 # Generate Friday retro
 npx sprintkit retro
+
+# Save to git
+npx sprintkit sync
 ```
 
 After `init`, your project gets a `.sprint/` directory:
@@ -153,15 +160,29 @@ Without SprintKit:                With SprintKit:
                                      • Known blockers
 ```
 
-### The Token Cost
+### The Token Cost — Real Numbers
 
-| Metric | Without | With SprintKit | Savings |
-|--------|---------|----------------|---------|
-| Context loading | ~20 min / session | ~2 min / session | **90%** |
-| Tokens per session | ~50K on context | ~5K on context | **90%** |
-| Work time per 30min session | ~10 min | ~28 min | **2.8x** |
-| Repeated work | Common | Never | **100%** |
-| Knowledge loss between sessions | Total | Zero | **∞** |
+*Measured on a real project (DataFrancePro, 5M company database, 70+ tickets):*
+
+| What the agent reads | Without SprintKit | With SprintKit |
+|---------------------|-------------------|----------------|
+| CLAUDE.md / instructions | 6,200 tokens | 200 tokens (AGENT.md) |
+| Session history (2-3 files) | 5,100 tokens | 0 (in sprint file) |
+| State file (ETAT_ACTUEL) | 1,600 tokens | 0 (in sprint file) |
+| Sprint file | — | 1,900 tokens |
+| **Total context tokens** | **~12,300** | **~2,100** |
+| **Reduction** | | **83%** |
+
+**Time measured across 10 real sessions:**
+
+| Metric | Without | With SprintKit | Improvement |
+|--------|---------|----------------|-------------|
+| Context loading | 8-15 min | 2 min | **4-7x faster** |
+| Work time per 30min session | 15-22 min | 28 min | **+50%** |
+| Repeated exploration | Every session | Never | Eliminated |
+| "What was I working on?" | Ask + explore | Read sprint file | Instant |
+
+> **Methodology**: Tokens estimated at ~4 bytes/token. Time measured from session start to first productive action (code edit or command). Data from 10 daily sessions on DataFrancePro (April 14-17, 2026). Without = sessions before agile structure. With = sessions after SprintKit setup.
 
 ### Agent Compatibility
 
@@ -263,19 +284,71 @@ This framework was battle-tested building [DataFrancePro](https://datafrancepro.
 
 **6 sprints, 70+ tickets, 1 developer, 30-minute daily sessions.**
 
-## Commands
+## Commands & Parameters
+
+### `sprintkit init [options]`
+
+Scaffolds `.sprint/` directory with all templates.
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--name <name>` | directory name | Project name |
+| `--daily <minutes>` | `30` | Daily session duration |
+| `--days <n>` | `5` | Working days per sprint |
+| `--retro-day <day>` | `friday` | Retrospective day |
+| `--agent <type>` | `auto` | Agent: `claude`, `cursor`, `copilot`, `aider`, `windsurf` |
+| `--force` | — | Overwrite existing `.sprint/` |
+
+```bash
+# Solo dev, short sessions
+npx sprintkit init --daily 20 --days 3
+
+# Team with Cursor, longer sprints
+npx sprintkit init --name "MyApp" --daily 60 --agent cursor
+
+# Weekend warrior
+npx sprintkit init --daily 120 --days 2 --retro-day sunday
+```
+
+### `sprintkit sprint new [options]`
+
+Creates next weekly sprint from template.
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--goal <text>` | `TBD` | Sprint goal |
+| `--daily <minutes>` | from config | Override daily duration |
+| `--days <n>` | from config | Override working days |
+
+```bash
+npx sprintkit sprint new --goal "Launch auth + payment flow"
+```
+
+### `sprintkit backlog add <description> [options]`
+
+Adds a prioritized ticket to the backlog.
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `P0`-`P4` | `P2` | Priority level |
+| `XS`/`S`/`M`/`L`/`XL` | `M` | Effort estimate |
+| `--sprint <id>` | — | Assign to a sprint |
+
+```bash
+npx sprintkit backlog add "Fix auth redirect loop" P1 S
+npx sprintkit backlog add "Add rate limiting" P2 M --sprint S03
+npx sprintkit backlog add "Security audit" P0 XL
+```
+
+### Other commands
 
 | Command | Description |
 |---------|-------------|
-| `sprintkit init` | Initialize SprintKit in current project |
-| `sprintkit status` | Show today's status (day, sprint, progress, deploys) |
-| `sprintkit sprint new` | Create a new sprint from backlog |
-| `sprintkit sprint close` | Close current sprint, generate summary |
-| `sprintkit backlog add` | Add a ticket to the backlog |
-| `sprintkit backlog list` | List backlog by priority |
-| `sprintkit retro` | Generate retrospective template for today |
-| `sprintkit daily` | Start a daily session (timer + ticket) |
-| `sprintkit sync` | Push .sprint/ changes to git |
+| `sprintkit status` | Today's date, sprint, progress bar, remaining tickets |
+| `sprintkit backlog list` | Display full backlog |
+| `sprintkit retro` | Generate Friday retrospective template |
+| `sprintkit config` | Show current configuration |
+| `sprintkit sync` | Git commit + push `.sprint/` changes |
 
 ## What Gets Generated
 
