@@ -520,6 +520,6 @@ If Sprint Agent saves you tokens or time:
 
 MIT — [Miloud Belarebia](https://github.com/miloudbelarebia)
 
-**Built by [Miloud Belarebia](https://github.com/miloudbelarebia) with [Claude Code](https://claude.ai/code).**
+**Built by [Miloud Belarebia](https://github.com/miloudbelarebia) — Founder of [2PiData](https://2pidata.fr).**
 
 *Tested in production: DataFrancePro, 5M+ companies, 70+ tickets, 6 sprints, one developer + Claude Code.*
