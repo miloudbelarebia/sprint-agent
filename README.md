@@ -4,6 +4,7 @@
 
 Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
 
+[![CI](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB.svg)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-green.svg)]()
