@@ -62,13 +62,15 @@ Every time you start a new session with an AI agent, it wastes time re-reading y
 Two ways — same tool, your choice:
 
 ```bash
-# Option A: pip install (recommended)
-pip install sprint-agent
-sprint-agent init
-
-# Option B: standalone (zero install)
-curl -O https://raw.githubusercontent.com/2pidata/sprint-agent/main/sprint_agent.py
+# Option A: standalone (zero install, recommended)
+curl -O https://raw.githubusercontent.com/miloudbelarebia/sprint-agent/main/sprint_agent.py
 python sprint_agent.py init
+
+# Option B: pip (PyPI release coming soon as `sprint-agent-cli`)
+# git clone + pip install -e . works today:
+git clone https://github.com/miloudbelarebia/sprint-agent
+cd sprint-agent && pip install -e .
+sprint-agent init
 ```
 
 ---
@@ -446,20 +448,20 @@ Battle-tested building [DataFrancePro](https://datafrancepro.fr) — a B2B SaaS 
 ## Contributing
 
 ```bash
-git clone https://github.com/2pidata/sprint-agent
+git clone https://github.com/miloudbelarebia/sprint-agent
 cd sprint-agent
 python sprint_agent.py --help    # test locally
 python sprint_agent.py init      # test init
 ```
 
-Issues and PRs welcome: [github.com/2pidata/sprint-agent/issues](https://github.com/2pidata/sprint-agent/issues)
+Issues and PRs welcome: [github.com/miloudbelarebia/sprint-agent/issues](https://github.com/miloudbelarebia/sprint-agent/issues)
 
 ---
 
 ## License
 
-MIT — [2PiData](https://2pidata.fr)
+MIT — [Miloud Belarebia](https://github.com/miloudbelarebia)
 
-**Built by [Miloud Belarebia](https://github.com/miloudbelarebia) — Founder of [2PiData](https://2pidata.fr)**
+**Built by [Miloud Belarebia](https://github.com/miloudbelarebia)**
 
 *Tested in production: DataFrancePro, 5M+ companies, 70+ tickets, 6 sprints, one developer + Claude Code.*

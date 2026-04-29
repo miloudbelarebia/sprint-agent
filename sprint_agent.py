@@ -4,11 +4,11 @@ Sprint Agent — Turn any AI agent into an agile developer.
 
 Works two ways:
   1. Standalone:  python sprint_agent.py init
-  2. Via pip:     pip install sprint-agent && sprint-agent init
+  2. Via clone:   git clone <repo> && cd sprint-agent && pip install -e .
 
 Zero dependencies. Pure Python stdlib.
 
-https://github.com/2pidata/sprint-agent
+https://github.com/miloudbelarebia/sprint-agent
 """
 
 import argparse
@@ -18,7 +18,7 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 SPRINT_DIR = ".sprint"
 
@@ -148,7 +148,7 @@ def cmd_init(args):
     # config.yaml
     with open(os.path.join(SPRINT_DIR, "config.yaml"), "w") as f:
         f.write(f"""# Sprint Agent configuration
-# Docs: https://github.com/2pidata/sprint-agent
+# Docs: https://github.com/miloudbelarebia/sprint-agent
 
 project:
   name: "{project_name}"
@@ -263,7 +263,7 @@ effort:
 
 ## Sprint Agent
 
-This project uses [Sprint Agent](https://github.com/2pidata/sprint-agent) for agile AI workflow.
+This project uses [Sprint Agent](https://github.com/miloudbelarebia/sprint-agent) for agile AI workflow.
 Run `sprint-agent status` to see today's context.
 """)
         print(f"{GREEN}✓{RESET} Created CLAUDE.md")
@@ -338,7 +338,7 @@ def cmd_status(args):
 
     print()
     print(f"{BOLD}╔══════════════════════════════════════════════╗{RESET}")
-    print(f"{BOLD}║          Sprint Agent — Daily Status             ║{RESET}")
+    print(f"{BOLD}║         Sprint Agent — Daily Status          ║{RESET}")
     print(f"{BOLD}╠══════════════════════════════════════════════╣{RESET}")
     print(f"{BOLD}║{RESET}  {CYAN}Date{RESET}    : {BOLD}{today()} ({dname}){RESET}")
 
@@ -602,7 +602,7 @@ examples:
   sprint-agent retro
   sprint-agent sync
 
-docs: https://github.com/2pidata/sprint-agent
+docs: https://github.com/miloudbelarebia/sprint-agent
 """,
     )
     parser.add_argument("--version", action="version", version=f"sprint-agent {__version__}")
