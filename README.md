@@ -1,28 +1,13 @@
-<div align="center">
+# 🏃 sprint-agent
 
-# Sprint Agent
-
-[![Typing animation](https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=28&pause=1200&color=00D9F5&center=true&vCenter=true&width=720&height=70&lines=Turn+any+AI+agent+into+an+agile+developer.;83%25+fewer+tokens+per+session.;One+shared+sprint+board%3A+you+%2B+AI.;Zero+dependencies.+Pure+Python.)](https://github.com/miloudbelarebia/sprint-agent)
-
-<!--
-  Demo GIF — generate locally with `vhs demo.tape`, then uncomment the line below.
-  VHS install: https://github.com/charmbracelet/vhs
-  ![Sprint Agent demo](docs/demo.gif)
--->
+> **Turn any AI agent into an agile developer.** Persistent sprint context for Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf. **83% fewer tokens per session**. Zero dependencies. Pure Python.
 
 [![CI](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB.svg)](https://python.org)
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-green.svg)]()
-[![GitHub stars](https://img.shields.io/github/stars/miloudbelarebia/sprint-agent?style=social)](https://github.com/miloudbelarebia/sprint-agent/stargazers)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-3776AB.svg)](https://python.org)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-green.svg)]()
 
-**[★ Star this repo](https://github.com/miloudbelarebia/sprint-agent) · [Report a bug](https://github.com/miloudbelarebia/sprint-agent/issues) · [Discuss](https://github.com/miloudbelarebia/sprint-agent/discussions)**
-
-</div>
-
----
-
-Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
+Sprint Agent gives AI coding agents persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
 
 ---
 
@@ -504,22 +489,9 @@ Issues and PRs welcome: [github.com/miloudbelarebia/sprint-agent/issues](https:/
 
 ---
 
-## ★ Show some love
-
-If Sprint Agent saves you tokens or time:
-
-- **[Star the repo](https://github.com/miloudbelarebia/sprint-agent)** — it's the cheapest way to support
-- **Share it** with one solo dev who's drowning in AI sessions
-- **Open an issue** with what's missing for your workflow
-
-[![Star History Chart](https://api.star-history.com/svg?repos=miloudbelarebia/sprint-agent&type=Date)](https://star-history.com/#miloudbelarebia/sprint-agent&Date)
-
----
-
 ## License
 
-MIT — [Miloud Belarebia](https://github.com/miloudbelarebia)
+MIT — see [LICENSE](LICENSE).
 
-**Built by [Miloud Belarebia](https://github.com/miloudbelarebia) — Founder of [2PiData](https://2pidata.fr).**
-
-*Tested in production: DataFrancePro, 5M+ companies, 70+ tickets, 6 sprints, one developer + Claude Code.*
+Built by [Miloud Belarebia](https://2pidata.fr) · part of the [2PiData](https://2pidata.fr) toolkit.
+Battle-tested on [DataFrancePro](https://datafrancepro.fr) — 5M+ companies, 70+ tickets, 6 sprints, 1 developer + Claude Code.
