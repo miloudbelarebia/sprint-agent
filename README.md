@@ -1,3 +1,23 @@
+<div align="center">
+
+```
+        ╔═══════════════════════════════════════════════╗
+        ║                                               ║
+        ║     ░▒▓█  S P R I N T   A G E N T  █▓▒░       ║
+        ║                                               ║
+        ║         agile workflow for AI + you           ║
+        ║                                               ║
+        ╚═══════════════════════════════════════════════╝
+
+           ┌────────┐         ┌──────────┐
+           │  YOU   │  ◄───►  │ AI AGENT │     ←─── one shared
+           └────────┘         └──────────┘          .sprint/ board
+                       ▲   ▲
+                       └─┬─┘
+                         │
+                   git commit
+```
+
 # Sprint Agent
 
 **Turn any AI agent into an agile developer.**
@@ -8,6 +28,11 @@ Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB.svg)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-green.svg)]()
+[![GitHub stars](https://img.shields.io/github/stars/miloudbelarebia/sprint-agent?style=social)](https://github.com/miloudbelarebia/sprint-agent/stargazers)
+
+**[★ Star this repo](https://github.com/miloudbelarebia/sprint-agent) · [Report a bug](https://github.com/miloudbelarebia/sprint-agent/issues) · [Discuss](https://github.com/miloudbelarebia/sprint-agent/discussions)**
+
+</div>
 
 ---
 
@@ -446,7 +471,37 @@ Battle-tested building [DataFrancePro](https://datafrancepro.fr) — a B2B SaaS 
 
 ---
 
+## Why I built this
+
+I was burning **20-40% of every Claude Code session** watching the agent re-discover my codebase. Same files. Same conclusions. Every time.
+
+So I tried the obvious thing: write down what's done, what's next, what failed — in a file the agent reads first. Token cost dropped 83%. Time-to-first-edit dropped from 8-15 min to 2 min.
+
+The unlock was treating the AI agent like a teammate who joined yesterday: give them a sprint board, not a tabula rasa. After 6 sprints and 70+ shipped tickets on [DataFrancePro](https://datafrancepro.fr), this workflow became how I ship.
+
+Open-sourcing it because the format works for any agent, any project, any solo dev. — *Miloud*
+
+---
+
+## Roadmap
+
+Sprint Agent stays small. Here's what's planned:
+
+- [ ] PyPI publish as `sprint-agent-cli`
+- [ ] `sprint-agent ticket done <id>` — mark a ticket as done from CLI
+- [ ] `sprint-agent burnup` — burnup chart in the terminal
+- [ ] `sprint-agent stats` — sprint velocity and trend over time
+- [ ] Pre-built `.sprint/` templates for common stacks (Next.js, FastAPI, Rails)
+- [ ] Optional `sprint-agent watch` — auto-sync on file changes
+- [ ] VSCode/Cursor extension to render the sprint as a sidebar
+
+Vote with thumbs on the [discussions board](https://github.com/miloudbelarebia/sprint-agent/discussions) — most-requested ships first.
+
+---
+
 ## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). TL;DR:
 
 ```bash
 git clone https://github.com/miloudbelarebia/sprint-agent
@@ -459,10 +514,22 @@ Issues and PRs welcome: [github.com/miloudbelarebia/sprint-agent/issues](https:/
 
 ---
 
+## ★ Show some love
+
+If Sprint Agent saves you tokens or time:
+
+- **[Star the repo](https://github.com/miloudbelarebia/sprint-agent)** — it's the cheapest way to support
+- **Share it** with one solo dev who's drowning in AI sessions
+- **Open an issue** with what's missing for your workflow
+
+[![Star History Chart](https://api.star-history.com/svg?repos=miloudbelarebia/sprint-agent&type=Date)](https://star-history.com/#miloudbelarebia/sprint-agent&Date)
+
+---
+
 ## License
 
 MIT — [Miloud Belarebia](https://github.com/miloudbelarebia)
 
-**Built by [Miloud Belarebia](https://github.com/miloudbelarebia)**
+**Built by [Miloud Belarebia](https://github.com/miloudbelarebia) with [Claude Code](https://claude.ai/code).**
 
 *Tested in production: DataFrancePro, 5M+ companies, 70+ tickets, 6 sprints, one developer + Claude Code.*
