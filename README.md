@@ -1,28 +1,14 @@
 <div align="center">
 
-```
-        ╔═══════════════════════════════════════════════╗
-        ║                                               ║
-        ║     ░▒▓█  S P R I N T   A G E N T  █▓▒░       ║
-        ║                                               ║
-        ║         agile workflow for AI + you           ║
-        ║                                               ║
-        ╚═══════════════════════════════════════════════╝
-
-           ┌────────┐         ┌──────────┐
-           │  YOU   │  ◄───►  │ AI AGENT │     ←─── one shared
-           └────────┘         └──────────┘          .sprint/ board
-                       ▲   ▲
-                       └─┬─┘
-                         │
-                   git commit
-```
-
 # Sprint Agent
 
-**Turn any AI agent into an agile developer.**
+[![Typing animation](https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=28&pause=1200&color=00D9F5&center=true&vCenter=true&width=720&height=70&lines=Turn+any+AI+agent+into+an+agile+developer.;83%25+fewer+tokens+per+session.;One+shared+sprint+board%3A+you+%2B+AI.;Zero+dependencies.+Pure+Python.)](https://github.com/miloudbelarebia/sprint-agent)
 
-Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
+<!--
+  Demo GIF — generate locally with `vhs demo.tape`, then uncomment the line below.
+  VHS install: https://github.com/charmbracelet/vhs
+  ![Sprint Agent demo](docs/demo.gif)
+-->
 
 [![CI](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -33,6 +19,10 @@ Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini
 **[★ Star this repo](https://github.com/miloudbelarebia/sprint-agent) · [Report a bug](https://github.com/miloudbelarebia/sprint-agent/issues) · [Discuss](https://github.com/miloudbelarebia/sprint-agent/discussions)**
 
 </div>
+
+---
+
+Sprint Agent gives AI coding agents (Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf) persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
 
 ---
 
