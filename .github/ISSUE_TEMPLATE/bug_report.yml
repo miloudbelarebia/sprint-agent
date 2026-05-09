@@ -1,0 +1,61 @@
+name: Bug report
+description: Something is broken in Sprint Agent
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report!
+
+  - type: input
+    id: version
+    attributes:
+      label: Sprint Agent version
+      description: Run `sprint-agent --version`
+      placeholder: "0.4.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      description: Run `python --version`
+      placeholder: "3.11.5"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "macOS 14.5 / Ubuntu 22.04 / Windows 11"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe what you expected vs what actually happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: Minimal steps to reproduce
+      placeholder: |
+        1. `mkdir test && cd test`
+        2. `sprint-agent init`
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output / logs
+      description: Paste the error output (will be auto-formatted as code).
+      render: shell

@@ -325,7 +325,7 @@ _Add context, blockers, and discoveries here._
     print(f"  1. Edit {CYAN}.sprint/AGENT.md{RESET} — add your project context")
     print(f"  2. Edit {CYAN}.sprint/backlog.md{RESET} — add your tickets")
     print(f"  3. Run {CYAN}sprint-agent status{RESET} to verify")
-    print(f"  4. Start a session with your AI agent")
+    print("  4. Start a session with your AI agent")
     print()
 
 
@@ -361,7 +361,7 @@ def cmd_status(args):
             print(f"\n{DIM}  Weekend — no sprint{RESET}")
 
         lines = content.split("\n")
-        todos = [l for l in lines if "[ ]" in l]
+        todos = [ln for ln in lines if "[ ]" in ln]
         if todos:
             print(f"\n{YELLOW}Remaining tickets:{RESET}")
             for t in todos[:5]:
@@ -488,9 +488,9 @@ def cmd_backlog_add(args):
     if not desc:
         print(f"\n{BOLD}Usage:{RESET} sprint-agent backlog add <description> [options]")
         print(f"\n{BOLD}Options:{RESET}")
-        print(f"  --priority P0-P4   Priority (default: P2)")
-        print(f"  --effort XS-XL     Effort (default: M)")
-        print(f"  --sprint S03       Assign to sprint")
+        print("  --priority P0-P4   Priority (default: P2)")
+        print("  --effort XS-XL     Effort (default: M)")
+        print("  --sprint S03       Assign to sprint")
         print(f"\n{BOLD}Examples:{RESET}")
         print(f'  {CYAN}sprint-agent backlog add "Fix auth bug" --priority P1 --effort S{RESET}')
         print(f'  {CYAN}sprint-agent backlog add "E2E tests" --priority P2 --effort L --sprint S03{RESET}\n')
@@ -526,7 +526,7 @@ def cmd_backlog_add(args):
     if insert_idx >= 0:
         lines.insert(insert_idx + 1, new_line)
     else:
-        done_idx = next((i for i, l in enumerate(lines) if l.startswith("## Done")), len(lines))
+        done_idx = next((i for i, ln in enumerate(lines) if ln.startswith("## Done")), len(lines))
         lines.insert(done_idx, new_line)
 
     with open(backlog_path, "w") as f:
@@ -592,7 +592,7 @@ def main():
         prog="sprint-agent",
         description="Turn any AI agent into an agile developer.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=f"""
+        epilog="""
 examples:
   sprint-agent init --daily 30 --agent claude
   sprint-agent init --name "My SaaS" --days 4 --retro-day thursday

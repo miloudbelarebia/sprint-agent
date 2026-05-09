@@ -3,18 +3,36 @@ requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sprint-agent-cli"
+name = "sprint-agent"
 version = "0.4.0"
-description = "Turn any AI agent into an agile developer. Persistent sprint context for Claude Code, Cursor, Copilot, and more."
+description = "Turn any AI agent into an agile developer. Persistent sprint context for Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf. Zero dependencies."
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
 authors = [
     {name = "Miloud Belarebia", email = "databelarebia@gmail.com"},
 ]
-keywords = ["ai", "agent", "agile", "sprint", "claude", "cursor", "copilot", "developer-tools", "productivity"]
+keywords = [
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "agile",
+    "sprint",
+    "claude-code",
+    "cursor",
+    "copilot",
+    "codex",
+    "gemini",
+    "aider",
+    "windsurf",
+    "developer-tools",
+    "productivity",
+    "llm",
+    "llm-tools",
+    "context-engineering",
+]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -24,8 +42,10 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
     "Topic :: Software Development :: Quality Assurance",
     "Topic :: Software Development :: Testing",
+    "Topic :: Utilities",
 ]
 
 [project.urls]
@@ -34,8 +54,24 @@ Repository = "https://github.com/miloudbelarebia/sprint-agent"
 Issues = "https://github.com/miloudbelarebia/sprint-agent/issues"
 Changelog = "https://github.com/miloudbelarebia/sprint-agent/blob/main/CHANGELOG.md"
 
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+dev = ["pytest>=7.0", "ruff>=0.1.0", "build>=1.0", "twine>=4.0"]
+
 [tool.setuptools]
 py-modules = ["sprint_agent"]
 
 [project.scripts]
 sprint-agent = "sprint_agent:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
