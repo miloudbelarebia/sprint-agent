@@ -49,7 +49,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/miloudbelarebia/sprint-agent"
+Homepage = "https://miloudbelarebia.github.io/sprint-agent/"
+Documentation = "https://miloudbelarebia.github.io/sprint-agent/"
 Repository = "https://github.com/miloudbelarebia/sprint-agent"
 Issues = "https://github.com/miloudbelarebia/sprint-agent/issues"
 Changelog = "https://github.com/miloudbelarebia/sprint-agent/blob/main/CHANGELOG.md"

@@ -78,6 +78,15 @@ def ensure_dir(p):
     Path(p).mkdir(parents=True, exist_ok=True)
 
 
+def backup_if_exists(path):
+    """Rename existing file to <path>.bak so --force never silently destroys user customizations."""
+    if os.path.exists(path):
+        try:
+            os.replace(path, f"{path}.bak")
+        except OSError:
+            pass
+
+
 def progress_bar(done, total, length=25):
     if total == 0:
         return "░" * length
@@ -258,6 +267,7 @@ effort:
 
     # CLAUDE.md (root)
     if not os.path.exists("CLAUDE.md") or args.force:
+        backup_if_exists("CLAUDE.md")
         with open("CLAUDE.md", "w", encoding="utf-8") as f:
             f.write("""# Project Instructions
 
@@ -279,6 +289,7 @@ Run `sprint-agent status` to see today's context.
     # .cursorrules (Cursor)
     if agent in ("auto", "cursor"):
         if not os.path.exists(".cursorrules") or args.force:
+            backup_if_exists(".cursorrules")
             with open(".cursorrules", "w", encoding="utf-8") as f:
                 f.write("Read .sprint/AGENT.md for workflow instructions.\nRead the latest file in .sprint/sprints/ for today's plan.\n")
             print(f"{GREEN}✓{RESET} Created .cursorrules")
@@ -286,6 +297,7 @@ Run `sprint-agent status` to see today's context.
     # AGENTS.md (OpenAI Codex)
     if agent in ("auto", "codex"):
         if not os.path.exists("AGENTS.md") or args.force:
+            backup_if_exists("AGENTS.md")
             with open("AGENTS.md", "w", encoding="utf-8") as f:
                 f.write("# Agent Instructions\n\nRead `.sprint/AGENT.md` for workflow and project context.\nRead the latest file in `.sprint/sprints/` for today's plan.\n")
             print(f"{GREEN}✓{RESET} Created AGENTS.md")
@@ -356,7 +368,11 @@ def cmd_status(args):
         done, todo = count_checkboxes(content)
         total = done + todo
 
-        print(f"{BOLD}║{RESET}  {CYAN}Sprint{RESET}  : {BOLD}{sprint_name}{RESET}  (day {min(dn, 5)}/5)")
+        try:
+            days_per_sprint = int(config.get("sprint.days_per_sprint", "5"))
+        except ValueError:
+            days_per_sprint = 5
+        print(f"{BOLD}║{RESET}  {CYAN}Sprint{RESET}  : {BOLD}{sprint_name}{RESET}  (day {min(dn, days_per_sprint)}/{days_per_sprint})")
         print(f"{BOLD}║{RESET}  {CYAN}Progress{RESET}: {progress_bar(done, total)}  ({done}/{total})")
         print(f"{BOLD}║{RESET}  {CYAN}Daily{RESET}   : {daily_min} min session")
         print(f"{BOLD}╚══════════════════════════════════════════════╝{RESET}")

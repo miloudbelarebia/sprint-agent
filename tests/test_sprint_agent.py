@@ -130,3 +130,33 @@ def test_count_checkboxes():
 def test_progress_bar_zero_total():
     bar = sprint_agent.progress_bar(0, 0)
     assert "░" in bar
+
+
+def test_status_respects_custom_days_per_sprint(in_tmp_project, monkeypatch, capsys):
+    """Regression: status used to hardcode `/5`. Now reads days_per_sprint from config."""
+    run_cli(monkeypatch, capsys, "init", "--days", "4")
+    out = run_cli(monkeypatch, capsys, "status")
+    assert "/4" in out.out
+    assert "/5" not in out.out
+
+
+def test_init_force_backs_up_existing_claude_md(in_tmp_project, monkeypatch, capsys):
+    """--force must preserve user customizations as a .bak file."""
+    (in_tmp_project / "CLAUDE.md").write_text("CUSTOM USER CONTENT", encoding="utf-8")
+    run_cli(monkeypatch, capsys, "init", "--force")
+    bak = in_tmp_project / "CLAUDE.md.bak"
+    assert bak.is_file(), "CLAUDE.md.bak should exist after --force overwrite"
+    assert bak.read_text(encoding="utf-8") == "CUSTOM USER CONTENT"
+
+
+def test_init_force_backs_up_cursorrules_and_agents_md(in_tmp_project, monkeypatch, capsys):
+    (in_tmp_project / ".cursorrules").write_text("CUSTOM CURSOR", encoding="utf-8")
+    (in_tmp_project / "AGENTS.md").write_text("CUSTOM AGENTS", encoding="utf-8")
+    run_cli(monkeypatch, capsys, "init", "--force", "--agent", "auto")
+    assert (in_tmp_project / ".cursorrules.bak").read_text(encoding="utf-8") == "CUSTOM CURSOR"
+    assert (in_tmp_project / "AGENTS.md.bak").read_text(encoding="utf-8") == "CUSTOM AGENTS"
+
+
+def test_backup_if_exists_helper_no_op_when_missing(tmp_path):
+    """backup_if_exists must not raise when target does not exist."""
+    sprint_agent.backup_if_exists(str(tmp_path / "nonexistent.txt"))

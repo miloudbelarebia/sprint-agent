@@ -2,6 +2,23 @@
 
 All notable changes to Sprint Agent. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning: [SemVer](https://semver.org).
 
+## [Unreleased]
+
+### Added
+- `backup_if_exists()` helper: `init --force` now writes `<file>.bak` for `CLAUDE.md`, `.cursorrules`, and `AGENTS.md` before overwriting them, so user customizations survive a re-init
+- 4 new pytest cases covering `--days` configurability and the new backup-on-`--force` contract (20 total, all green)
+- CONTRIBUTING.md: internal notes section documenting the YAML parser scope and the `--force` backup contract
+
+### Changed
+- README: install section now leads with `pip install sprint-agent` (Option A), standalone curl is Option B
+- README: example dates bumped from 2025 to 2026 across all snippets
+- README: methodology disclaimer expanded — clarifies "personal benchmark, single developer" and warns that the 83% number is directional
+- README roadmap: removed `[ ] PyPI publish as sprint-agent-cli` (already shipped under `sprint-agent`); reframed VSCode/Cursor extension as a companion repo so it does not break the single-file core promise
+- `pyproject.toml`: `Homepage` now points to the GitHub Pages landing (`https://miloudbelarebia.github.io/sprint-agent/`); kept the repo URL under `Repository` and added a `Documentation` URL
+
+### Fixed
+- `sprint-agent status` no longer hardcodes `/5` — it now reads `days_per_sprint` from `config.yaml`, so users with `--days 4` (or any other value) see the correct day counter
+
 ## [0.4.0] — 2026-05-09
 
 ### Added

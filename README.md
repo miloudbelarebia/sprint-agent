@@ -68,16 +68,16 @@ Every time you start a new session with an AI agent, it wastes time re-reading y
 Two ways — same tool, your choice:
 
 ```bash
-# Option A: standalone (zero install, recommended)
+# Option A: pip (recommended)
+pip install sprint-agent
+sprint-agent init
+
+# Option B: standalone (zero install, drop-in single file)
 curl -O https://raw.githubusercontent.com/miloudbelarebia/sprint-agent/main/sprint_agent.py
 python sprint_agent.py init
-
-# Option B: pip (PyPI release coming soon as `sprint-agent-cli`)
-# git clone + pip install -e . works today:
-git clone https://github.com/miloudbelarebia/sprint-agent
-cd sprint-agent && pip install -e .
-sprint-agent init
 ```
+
+> **Why two modes?** The `pip` path is the standard developer experience. The standalone path is for restricted environments (corporate firewalls, ephemeral CI runners, air-gapped boxes) where `pip install` isn't an option — drop one `.py` file in the repo and it just works.
 
 ---
 
@@ -113,7 +113,7 @@ your-project/
 │   ├── backlog.md            ← Prioritized product backlog
 │   ├── config.yaml           ← Sprint settings (daily duration, etc.)
 │   ├── sprints/
-│   │   └── S01_2025-01-06.md ← Weekly sprint with daily breakdown
+│   │   └── S01_2026-01-05.md ← Weekly sprint with daily breakdown
 │   ├── retros/
 │   │   └── RETRO_S01.md      ← Friday retrospective
 │   └── sessions/
@@ -181,7 +181,7 @@ your-project/
 | Work time / 30min | 15-22 min | 28 min | **+50%** |
 | Repeated exploration | Every session | Never | Eliminated |
 
-> **Methodology**: Tokens at ~4 bytes/token. Time = session start to first code edit. 10 daily sessions, April 2026. Before = no agile structure. After = Sprint Agent.
+> **Methodology**: Personal benchmark, single developer (me) on [DataFrancePro](https://datafrancepro.fr). Tokens at ~4 bytes/token. Time = session start to first code edit. 10 daily sessions, April 2026. Before = no agile structure. After = Sprint Agent. **Your numbers will vary** depending on project size, codebase complexity, and existing context discipline. Treat the 83% as a directional reference, not a guarantee.
 
 ---
 
@@ -270,7 +270,7 @@ Show today's context: date, sprint, progress bar, remaining tickets.
 ╔══════════════════════════════════════════════╗
 ║          Sprint Agent — Daily Status          ║
 ╠══════════════════════════════════════════════╣
-║  Date    : 2025-01-15 (Wednesday)            ║
+║  Date    : 2026-01-14 (Wednesday)            ║
 ║  Sprint  : S03  (day 3/5)                    ║
 ║  Progress: ████████████░░░░░░░░░░░░░ 48%     ║
 ║  Daily   : 30 min session                    ║
@@ -385,7 +385,7 @@ effort:
 ### Sprint file (one per week)
 
 ```markdown
-# Sprint S03 — Week of 2025-01-20
+# Sprint S03 — Week of 2026-01-19
 
 > Goal: Launch auth + payment
 > Capacity: 5 x 30min = 2.5h
@@ -408,7 +408,7 @@ effort:
 ### Retrospective (every Friday)
 
 ```markdown
-# Retrospective S03 — 2025-01-24
+# Retrospective S03 — 2026-01-23
 
 ## 1. What went well
 - Auth flow shipped in 2 dailies
@@ -467,13 +467,12 @@ Open-sourcing it because the format works for any agent, any project, any solo d
 
 Sprint Agent stays small. Here's what's planned:
 
-- [ ] PyPI publish as `sprint-agent-cli`
 - [ ] `sprint-agent ticket done <id>` — mark a ticket as done from CLI
 - [ ] `sprint-agent burnup` — burnup chart in the terminal
 - [ ] `sprint-agent stats` — sprint velocity and trend over time
 - [ ] Pre-built `.sprint/` templates for common stacks (Next.js, FastAPI, Rails)
 - [ ] Optional `sprint-agent watch` — auto-sync on file changes
-- [ ] VSCode/Cursor extension to render the sprint as a sidebar
+- [ ] Companion VSCode/Cursor extension (separate repo, keeps core single-file)
 
 Vote with thumbs on the [discussions board](https://github.com/miloudbelarebia/sprint-agent/discussions) — most-requested ships first.
 
