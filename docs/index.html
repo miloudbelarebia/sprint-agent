@@ -277,7 +277,7 @@
     </div>
     <div class="right">
       <a class="gh-stars" href="https://github.com/miloudbelarebia/sprint-agent" aria-label="Star on GitHub">
-        <span class="star">★</span><span id="star-count">Star</span>
+        <span class="star">★</span><span>Star on GitHub</span><span id="star-count" hidden></span>
       </a>
       <a class="cta" href="#install">Install →</a>
     </div>
@@ -715,11 +715,13 @@
     copyText('pip install sprint-agent', this);
   });
 
-  // GitHub stars
+  // GitHub stars — only show count when > 0 (avoid negative "0 stars" signal)
   fetch('https://api.github.com/repos/miloudbelarebia/sprint-agent', {headers:{Accept:'application/vnd.github+json'}})
     .then(r=>r.ok?r.json():null).then(d=>{
-      if(d && typeof d.stargazers_count === 'number'){
-        document.getElementById('star-count').textContent = d.stargazers_count.toLocaleString('en-US');
+      if(d && typeof d.stargazers_count === 'number' && d.stargazers_count > 0){
+        const el = document.getElementById('star-count');
+        el.textContent = ' · ' + d.stargazers_count.toLocaleString('en-US');
+        el.hidden = false;
       }
     }).catch(()=>{});
 
