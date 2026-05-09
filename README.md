@@ -498,5 +498,5 @@ Issues and PRs welcome: [github.com/miloudbelarebia/sprint-agent/issues](https:/
 
 MIT — see [LICENSE](LICENSE).
 
-Built by [Miloud Belarebia](https://2pidata.fr) · part of the [2PiData](https://2pidata.fr) toolkit.
+Built by [Miloud Belarebia](https://github.com/miloudbelarebia).
 Battle-tested on [DataFrancePro](https://datafrancepro.fr) — 5M+ companies, 70+ tickets, 6 sprints, 1 developer + Claude Code.
