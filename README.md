@@ -7,7 +7,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/sprint-agent.svg)](https://pypi.org/project/sprint-agent/)
 [![CI](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml)
 [![Python 3.8+](https://img.shields.io/pypi/pyversions/sprint-agent.svg)](https://pypi.org/project/sprint-agent/)
-[![Downloads](https://static.pepy.tech/badge/sprint-agent/month)](https://pepy.tech/project/sprint-agent)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/sprint-agent.svg?color=blue&label=downloads%2Fmonth)](https://pypi.org/project/sprint-agent/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-green.svg)]()
 [![GitHub stars](https://img.shields.io/github/stars/miloudbelarebia/sprint-agent?style=social)](https://github.com/miloudbelarebia/sprint-agent/stargazers)
