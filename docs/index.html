@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sprint Agent — 83% less context tokens for AI coding agents</title>
+<meta name="description" content="Sprint Agent gives Claude Code, Cursor, Copilot, Codex, Gemini, Aider and Windsurf persistent sprint memory. 83% fewer context tokens per session. Zero deps. Pure Python." />
+<meta name="theme-color" content="#0b0d10" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Sprint Agent — Persistent sprint context for AI coding agents" />
+<meta property="og:description" content="83% less context tokens. 4–7× faster session starts. Battle-tested on 6 sprints / 70+ tickets. Zero dependencies." />
+<meta property="og:url" content="https://miloudbelarebia.github.io/sprint-agent/" />
+<meta property="og:image" content="https://miloudbelarebia.github.io/sprint-agent/og-image.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sprint Agent — Persistent sprint context for AI coding agents" />
+<meta name="twitter:description" content="83% less context tokens per session. Works with Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf." />
+<meta name="twitter:image" content="https://miloudbelarebia.github.io/sprint-agent/og-image.svg" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2300d97e'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='52' font-family='system-ui' font-weight='800' fill='%230b0d10'%3ES%3C/text%3E%3C/svg%3E" />
+
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#0b0d10; --bg-2:#11141a; --bg-3:#171b22; --line:#222831;
+    --fg:#e6edf3; --fg-dim:#9aa4b2; --fg-mute:#6b7280;
+    --accent:#00d97e; --accent-2:#7be0a9; --warn:#f5b549; --danger:#ff6b6b;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+    --sans:-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,sans-serif;
+    --rad:14px; --rad-sm:8px;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,pre{font-family:var(--mono);font-size:.92em}
+  ::selection{background:var(--accent);color:var(--bg)}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+  .container-narrow{max-width:840px;margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,13,16,.85);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line)}
+  nav .row{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+  nav .brand .logo{width:28px;height:28px;border-radius:8px;background:var(--accent);display:grid;place-items:center;color:var(--bg);font-weight:900}
+  nav .links{display:flex;gap:18px;font-size:14px;color:var(--fg-dim)}
+  nav .links a{color:var(--fg-dim)}
+  nav .links a:hover{color:var(--fg);text-decoration:none}
+  nav .cta{padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--fg)}
+  nav .cta:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+  /* hero */
+  header.hero{padding:80px 0 60px;text-align:center;position:relative;overflow:hidden}
+  header.hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(60% 60% at 50% 0%,rgba(0,217,126,.12),transparent 70%),
+    radial-gradient(40% 40% at 80% 30%,rgba(123,224,169,.06),transparent 70%);
+    pointer-events:none}
+  .badge-hero{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;font-size:12.5px;color:var(--fg-dim);margin-bottom:20px}
+  .badge-hero .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(0,217,126,.18)}
+  h1{font-size:clamp(34px,6vw,60px);margin:0 0 16px;letter-spacing:-.02em;line-height:1.05;font-weight:800}
+  h1 .accent{color:var(--accent)}
+  .lede{font-size:clamp(16px,2vw,19px);color:var(--fg-dim);max-width:680px;margin:0 auto 32px}
+  .install{display:inline-flex;align-items:center;gap:0;background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:0;margin:0 0 24px;font-family:var(--mono);overflow:hidden}
+  .install code{padding:14px 18px;color:var(--fg)}
+  .install button{background:var(--bg-3);border:0;border-left:1px solid var(--line);color:var(--fg-dim);padding:14px 16px;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .install button:hover{color:var(--accent)}
+  .install button.copied{color:var(--accent)}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;font-size:14px;border:1px solid transparent;transition:transform .1s ease}
+  .btn:hover{text-decoration:none;transform:translateY(-1px)}
+  .btn-primary{background:var(--accent);color:var(--bg)}
+  .btn-secondary{background:var(--bg-2);color:var(--fg);border-color:var(--line)}
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* counters */
+  .counters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:50px auto 0;max-width:880px}
+  .counter{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--rad);padding:22px}
+  .counter .num{font-family:var(--mono);font-size:32px;font-weight:700;color:var(--accent);letter-spacing:-.02em}
+  .counter .num.bad{color:var(--danger)}
+  .counter .label{font-size:13px;color:var(--fg-dim);margin-top:6px}
+  .counter .delta{font-size:11.5px;color:var(--fg-mute);margin-top:4px;font-family:var(--mono)}
+
+  /* sections */
+  section{padding:70px 0;border-top:1px solid var(--line)}
+  section h2{font-size:clamp(26px,3.6vw,38px);margin:0 0 12px;letter-spacing:-.02em;font-weight:800}
+  section .kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  section p.sub{color:var(--fg-dim);font-size:17px;max-width:680px;margin:0 0 36px}
+
+  /* before/after */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.compare{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--rad);padding:24px;position:relative}
+  .panel.bad{border-color:rgba(255,107,107,.25)}
+  .panel.good{border-color:rgba(0,217,126,.32)}
+  .panel h3{margin:0 0 6px;font-size:18px;letter-spacing:-.01em}
+  .panel .tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:6px;margin-bottom:14px}
+  .panel.bad .tag{background:rgba(255,107,107,.12);color:var(--danger)}
+  .panel.good .tag{background:rgba(0,217,126,.12);color:var(--accent)}
+  .sessions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 8px}
+  .session-bar{height:120px;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+  .session-bar .waste{flex:1;background:repeating-linear-gradient(45deg,rgba(255,107,107,.18) 0 6px,transparent 6px 12px)}
+  .session-bar .work{flex:1;background:rgba(0,217,126,.22)}
+  .session-bar.with-sa .waste{flex:.15}
+  .session-bar.with-sa .work{flex:.85;background:rgba(0,217,126,.45)}
+  .panel ul{list-style:none;padding:0;margin:14px 0 0;font-size:14px;color:var(--fg-dim)}
+  .panel li{padding:5px 0;display:flex;gap:8px}
+  .panel li::before{content:"·";color:var(--fg-mute)}
+  .panel.bad li::before{content:"✕";color:var(--danger)}
+  .panel.good li::before{content:"✓";color:var(--accent)}
+
+  /* terminal */
+  .terminal{background:#000;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:var(--mono);font-size:13.5px;line-height:1.5;box-shadow:0 30px 80px -30px rgba(0,217,126,.18)}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#161a21;border-bottom:1px solid var(--line)}
+  .term-bar .dot{width:11px;height:11px;border-radius:50%}
+  .term-bar .r{background:#ff5f57}.term-bar .y{background:#febc2e}.term-bar .g{background:#28c840}
+  .term-bar .title{margin-left:auto;color:var(--fg-mute);font-size:12px;font-family:var(--sans)}
+  .term-body{padding:18px 20px;min-height:340px;color:#eaeef3;white-space:pre-wrap}
+  .term-body .prompt{color:var(--accent)}
+  .term-body .hint{color:var(--fg-mute)}
+  .term-body .ok{color:var(--accent)}
+  .term-body .key{color:#7ec8ff}
+  .cursor{display:inline-block;width:8px;height:16px;background:var(--accent);vertical-align:text-bottom;animation:blink 1s steps(2,end) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* agents grid */
+  .agents{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .agent{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--rad);padding:18px}
+  .agent .name{font-weight:700;display:flex;align-items:center;gap:10px}
+  .agent .name .icon{width:28px;height:28px;border-radius:8px;background:var(--bg-3);display:grid;place-items:center;font-size:14px;color:var(--accent)}
+  .agent .file{font-family:var(--mono);font-size:12px;color:var(--fg-dim);margin-top:8px}
+  .agent .auto{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:5px;background:rgba(0,217,126,.12);color:var(--accent);margin-top:8px}
+
+  /* metrics */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:30px}
+  .metric{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--rad);padding:22px;text-align:center}
+  .metric .v{font-family:var(--mono);font-size:30px;color:var(--accent);font-weight:700;letter-spacing:-.02em}
+  .metric .k{font-size:13px;color:var(--fg-dim);margin-top:6px}
+
+  /* how */
+  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:840px){.how{grid-template-columns:repeat(2,1fr)}}
+  .step{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--rad);padding:20px}
+  .step .n{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:700}
+  .step h4{margin:8px 0 6px;font-size:15px;letter-spacing:-.01em}
+  .step p{font-size:13.5px;color:var(--fg-dim);margin:0}
+
+  /* footer */
+  footer{padding:50px 0 70px;border-top:1px solid var(--line);text-align:center;color:var(--fg-mute);font-size:13px}
+  footer .links{display:flex;justify-content:center;gap:18px;margin-bottom:14px;flex-wrap:wrap}
+  footer .links a{color:var(--fg-dim)}
+  footer .credit{margin-top:10px;font-size:12px}
+
+  /* utility */
+  .muted{color:var(--fg-mute)}
+  .center{text-align:center}
+  .stack-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin:30px 0 0;color:var(--fg-dim);font-size:14px}
+  .stack-stats b{color:var(--fg);font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="row">
+    <a class="brand" href="/sprint-agent/">
+      <span class="logo">S</span>
+      <span>sprint-agent</span>
+    </a>
+    <div class="links">
+      <a href="#how">How it works</a>
+      <a href="#agents">Agents</a>
+      <a href="#numbers">Numbers</a>
+      <a href="https://github.com/miloudbelarebia/sprint-agent">GitHub</a>
+    </div>
+    <a class="cta" href="https://github.com/miloudbelarebia/sprint-agent">★ Star</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container-narrow">
+    <span class="badge-hero"><span class="dot"></span> v0.4.0 — now on PyPI</span>
+    <h1>Turn any AI coding agent into an <span class="accent">agile developer</span>.</h1>
+    <p class="lede">
+      Sprint Agent gives Claude Code, Cursor, Copilot, Codex, Gemini, Aider and Windsurf <b>persistent sprint memory</b> — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
+    </p>
+
+    <div class="install">
+      <code id="install-cmd">pip install sprint-agent &amp;&amp; sprint-agent init</code>
+      <button id="copy-btn" aria-label="Copy install command">Copy</button>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/miloudbelarebia/sprint-agent">★ Star on GitHub</a>
+      <a class="btn btn-secondary" href="https://pypi.org/project/sprint-agent/">View on PyPI</a>
+    </div>
+
+    <div class="counters">
+      <div class="counter">
+        <div class="num bad" id="c-tokens-before">12,300</div>
+        <div class="label">Tokens per session — without</div>
+        <div class="delta">re-read 50 files every time</div>
+      </div>
+      <div class="counter">
+        <div class="num" id="c-tokens-after">2,100</div>
+        <div class="label">Tokens per session — with</div>
+        <div class="delta">↓ 83% reduction</div>
+      </div>
+      <div class="counter">
+        <div class="num" id="c-time">2 min</div>
+        <div class="label">Context loading</div>
+        <div class="delta">vs 8–15 min before · 4–7× faster</div>
+      </div>
+      <div class="counter">
+        <div class="num" id="c-work">28 min</div>
+        <div class="label">Real work in 30-min daily</div>
+        <div class="delta">vs 15–22 min before · +50%</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="problem">
+  <div class="container">
+    <span class="kicker">The problem</span>
+    <h2>Every AI session starts with 12k wasted tokens.</h2>
+    <p class="sub">Your agent re-reads the same files, asks the same questions, and rebuilds the same context. Every time you open a new session.</p>
+
+    <div class="compare">
+      <div class="panel bad">
+        <span class="tag">Without Sprint Agent</span>
+        <h3>Re-explore, re-explain, repeat</h3>
+        <div class="sessions">
+          <div class="session-bar"><div class="waste"></div><div class="work"></div></div>
+          <div class="session-bar"><div class="waste"></div><div class="work"></div></div>
+          <div class="session-bar"><div class="waste"></div><div class="work"></div></div>
+        </div>
+        <ul>
+          <li>~12,300 tokens of re-exploration per session</li>
+          <li>No memory of what you did yesterday</li>
+          <li>Agent forgets every blocker and decision</li>
+        </ul>
+      </div>
+      <div class="panel good">
+        <span class="tag">With Sprint Agent</span>
+        <h3>Pick up exactly where you left off</h3>
+        <div class="sessions">
+          <div class="session-bar with-sa"><div class="waste"></div><div class="work"></div></div>
+          <div class="session-bar with-sa"><div class="waste"></div><div class="work"></div></div>
+          <div class="session-bar with-sa"><div class="waste"></div><div class="work"></div></div>
+        </div>
+        <ul>
+          <li>~2,100 tokens · 83% reduction</li>
+          <li>Persistent sprint memory in <code>.sprint/</code></li>
+          <li>Agent knows what shipped, what's next, what's blocked</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="container-narrow">
+    <span class="kicker">In action</span>
+    <h2>Two minutes from install to first sprint.</h2>
+    <p class="sub">Drops a <code>.sprint/</code> folder in your repo with current sprint, backlog, and an <code>AGENT.md</code> your AI agent auto-reads.</p>
+
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="title">~/my-saas — sprint-agent</span>
+      </div>
+      <div class="term-body" id="term"></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="container">
+    <span class="kicker">How it works</span>
+    <h2>Markdown over databases. Git-native. Zero deps.</h2>
+    <p class="sub">No background server, no SQLite, no Docker. Just files your agent reads and your editor opens.</p>
+
+    <div class="how">
+      <div class="step">
+        <div class="n">01</div>
+        <h4>init</h4>
+        <p>Creates <code>.sprint/</code> with backlog, current sprint, and the right config file for your agent (CLAUDE.md / .cursorrules / AGENTS.md / …).</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h4>Daily 30-min</h4>
+        <p>One ticket per session. Your agent reads the sprint, picks the next TODO, works, updates the file.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h4>Friday retro</h4>
+        <p>One command generates the retrospective template. Score, document blockers, plan the next sprint.</p>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h4>git sync</h4>
+        <p>Sprint history is version-controlled. Your <code>.sprint/</code> diffs show progress over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="container">
+    <span class="kicker">Agent compatibility</span>
+    <h2>Works with every AI coding agent that reads project files.</h2>
+    <p class="sub">Auto-generates the config file each agent expects. One install, every tool.</p>
+
+    <div class="agents">
+      <div class="agent"><div class="name"><span class="icon">C</span>Claude Code</div><div class="file">CLAUDE.md</div><span class="auto">Auto-loaded</span></div>
+      <div class="agent"><div class="name"><span class="icon">▲</span>Cursor</div><div class="file">.cursorrules</div><span class="auto">Auto-loaded</span></div>
+      <div class="agent"><div class="name"><span class="icon">G</span>GitHub Copilot</div><div class="file">.github/copilot-instructions.md</div></div>
+      <div class="agent"><div class="name"><span class="icon">O</span>OpenAI Codex</div><div class="file">AGENTS.md</div><span class="auto">Auto-loaded</span></div>
+      <div class="agent"><div class="name"><span class="icon">★</span>Gemini</div><div class="file">read .sprint/AGENT.md</div></div>
+      <div class="agent"><div class="name"><span class="icon">A</span>Aider</div><div class="file">.aider.conf.yml</div></div>
+      <div class="agent"><div class="name"><span class="icon">≈</span>Windsurf</div><div class="file">.windsurfrules</div><span class="auto">Auto-loaded</span></div>
+      <div class="agent"><div class="name"><span class="icon">+</span>Any other agent</div><div class="file">point it at .sprint/AGENT.md</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="numbers">
+  <div class="container">
+    <span class="kicker">Battle-tested</span>
+    <h2>Six sprints. 70+ tickets. One developer.</h2>
+    <p class="sub">Used daily for six months building <a href="https://datafrancepro.fr">DataFrancePro</a> — a B2B SaaS with 5M+ company records. Numbers measured across 10 production sessions.</p>
+
+    <div class="metrics">
+      <div class="metric"><div class="v">−83%</div><div class="k">context tokens per session</div></div>
+      <div class="metric"><div class="v">4–7×</div><div class="k">faster session starts</div></div>
+      <div class="metric"><div class="v">+50%</div><div class="k">real work per 30-min daily</div></div>
+      <div class="metric"><div class="v">0</div><div class="k">runtime dependencies</div></div>
+    </div>
+
+    <div class="stack-stats">
+      <span><b>Python</b> 3.8 → 3.12</span>
+      <span><b>OS</b> Linux · macOS · Windows</span>
+      <span><b>License</b> MIT</span>
+      <span><b>Single file</b> sprint_agent.py</span>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="container-narrow center">
+    <span class="kicker">Get started</span>
+    <h2>Install in two minutes.</h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto">Two ways — same tool. Pick whichever you prefer.</p>
+
+    <div class="install" style="margin:0 0 12px">
+      <code>pip install sprint-agent</code>
+      <button onclick="copyText('pip install sprint-agent', this)">Copy</button>
+    </div>
+    <div class="install">
+      <code>curl -O https://raw.githubusercontent.com/miloudbelarebia/sprint-agent/main/sprint_agent.py</code>
+      <button onclick="copyText('curl -O https://raw.githubusercontent.com/miloudbelarebia/sprint-agent/main/sprint_agent.py', this)">Copy</button>
+    </div>
+
+    <div class="cta-row" style="margin-top:32px">
+      <a class="btn btn-primary" href="https://github.com/miloudbelarebia/sprint-agent">★ Star on GitHub</a>
+      <a class="btn btn-secondary" href="https://github.com/miloudbelarebia/sprint-agent#readme">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="links">
+      <a href="https://github.com/miloudbelarebia/sprint-agent">GitHub</a>
+      <a href="https://pypi.org/project/sprint-agent/">PyPI</a>
+      <a href="https://github.com/miloudbelarebia/sprint-agent/blob/main/CHANGELOG.md">Changelog</a>
+      <a href="https://github.com/miloudbelarebia/sprint-agent/issues">Issues</a>
+      <a href="https://github.com/miloudbelarebia/sprint-agent/discussions">Discussions</a>
+    </div>
+    <div>MIT — built by <a href="https://github.com/miloudbelarebia">Miloud Belarebia</a></div>
+    <div class="credit">Zero dependencies. Pure Python stdlib. Single file. Markdown over databases.</div>
+  </div>
+</footer>
+
+<script>
+  // Copy buttons
+  function copyText(text, btn){
+    navigator.clipboard.writeText(text).then(()=>{
+      const orig = btn.textContent; btn.textContent="Copied"; btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent=orig; btn.classList.remove('copied')}, 1400);
+    });
+  }
+  document.getElementById('copy-btn').addEventListener('click', function(){
+    copyText(document.getElementById('install-cmd').textContent, this);
+  });
+
+  // Animated counter (12,300 → 2,100)
+  function animateCounter(el, from, to, fmt, ms=1400){
+    const start = performance.now();
+    function tick(t){
+      const p = Math.min(1, (t-start)/ms);
+      const ease = 1 - Math.pow(1-p, 3);
+      const v = from + (to-from)*ease;
+      el.textContent = fmt(v);
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const counterObserver = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      counterObserver.unobserve(e.target);
+      const before = document.getElementById('c-tokens-before');
+      const after  = document.getElementById('c-tokens-after');
+      animateCounter(before, 0, 12300, v=>Math.round(v).toLocaleString('en-US'));
+      animateCounter(after,  12300, 2100, v=>Math.round(v).toLocaleString('en-US'), 1800);
+    });
+  }, {threshold:.4});
+  counterObserver.observe(document.querySelector('.counters'));
+
+  // Terminal typing animation
+  const term = document.getElementById('term');
+  const lines = [
+    {t:'$ ', cls:'prompt'}, {t:'sprint-agent init --name "My SaaS" --agent claude\n'},
+    {t:'\n  Sprint Agent — Initializing...\n\n', cls:'hint'},
+    {t:'  ✓', cls:'ok'}, {t:' Created .sprint/ directory\n'},
+    {t:'  ✓', cls:'ok'}, {t:' Created config.yaml (30min dailies, 5 days/sprint)\n'},
+    {t:'  ✓', cls:'ok'}, {t:' Created backlog.md\n'},
+    {t:'  ✓', cls:'ok'}, {t:' Created '}, {t:'AGENT.md', cls:'key'}, {t:' (auto-read by your AI agent)\n'},
+    {t:'  ✓', cls:'ok'}, {t:' Created '}, {t:'CLAUDE.md', cls:'key'}, {t:' (auto-loaded by Claude Code)\n'},
+    {t:'  ✓', cls:'ok'}, {t:' Created sprint S01\n\n'},
+    {t:'$ ', cls:'prompt'}, {t:'sprint-agent backlog add "Fix auth redirect" --priority P1 --effort S\n'},
+    {t:'  ✓', cls:'ok'}, {t:' Added '}, {t:'T-001', cls:'key'}, {t:': Fix auth redirect\n\n'},
+    {t:'$ ', cls:'prompt'}, {t:'sprint-agent status\n\n'},
+    {t:'  Sprint  : ', cls:'hint'}, {t:'S01  ', cls:'key'}, {t:'(day 1/5)\n', cls:'hint'},
+    {t:'  Progress: ', cls:'hint'}, {t:'░░░░░░░░░░░░░░░░░░░░░░░░░ 0%\n', cls:'ok'},
+    {t:'  Daily   : ', cls:'hint'}, {t:'30 min session\n\n', cls:'key'},
+    {t:'  Now your AI agent picks up exactly where you left off.', cls:'hint'},
+  ];
+  let i=0, j=0, current=null;
+  const speed = 18; // ms/char
+  function type(){
+    if(i>=lines.length){ term.appendChild(document.createElement('span')).className='cursor'; return; }
+    const seg = lines[i];
+    if(j===0){
+      current = document.createElement('span');
+      if(seg.cls) current.className = seg.cls;
+      term.appendChild(current);
+    }
+    current.textContent += seg.t.charAt(j);
+    j++;
+    if(j>=seg.t.length){ i++; j=0; setTimeout(type, 40); return; }
+    // Faster on whitespace and ✓
+    const ch = seg.t.charAt(j-1);
+    setTimeout(type, ch==='\n'?60:(ch===' '?6:speed));
+  }
+  const termObserver = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ termObserver.unobserve(e.target); type(); }
+    });
+  }, {threshold:.3});
+  termObserver.observe(document.getElementById('demo'));
+</script>
+</body>
+</html>

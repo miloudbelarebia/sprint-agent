@@ -2,10 +2,15 @@
 
 > **Turn any AI agent into an agile developer.** Persistent sprint context for Claude Code, Cursor, Copilot, Codex, Gemini, Aider, Windsurf. **83% fewer tokens per session**. Zero dependencies. Pure Python.
 
+**🌐 Website: [miloudbelarebia.github.io/sprint-agent](https://miloudbelarebia.github.io/sprint-agent/)**
+
+[![PyPI version](https://img.shields.io/pypi/v/sprint-agent.svg)](https://pypi.org/project/sprint-agent/)
 [![CI](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/miloudbelarebia/sprint-agent/actions/workflows/ci.yml)
+[![Python 3.8+](https://img.shields.io/pypi/pyversions/sprint-agent.svg)](https://pypi.org/project/sprint-agent/)
+[![Downloads](https://static.pepy.tech/badge/sprint-agent/month)](https://pepy.tech/project/sprint-agent)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-3776AB.svg)](https://python.org)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-green.svg)]()
+[![GitHub stars](https://img.shields.io/github/stars/miloudbelarebia/sprint-agent?style=social)](https://github.com/miloudbelarebia/sprint-agent/stargazers)
 
 Sprint Agent gives AI coding agents persistent memory and structured workflow — so they stop wasting tokens re-reading your codebase and start shipping like a teammate.
 
