@@ -209,17 +209,30 @@
   .num .v{font-family:var(--mono);font-size:48px;font-weight:600;color:var(--accent);letter-spacing:-.02em;line-height:1}
   .num .k{font-size:13px;color:var(--fg-2);margin-top:10px;font-weight:500}
 
-  /* ───────── testimonials ───────── */
-  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:880px){.quotes{grid-template-columns:1fr}}
-  .quote{background:var(--bg-1);border:1px solid var(--line);border-radius:var(--rad);padding:24px;display:flex;flex-direction:column;gap:18px}
-  .quote .body{color:var(--fg-1);font-size:15px;line-height:1.55;flex:1}
-  .quote .body::before{content:"\201C";font-family:Georgia,serif;font-size:38px;color:var(--accent);line-height:0;display:block;margin-bottom:16px}
-  .quote .author{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:16px}
-  .quote .av{width:36px;height:36px;border-radius:50%;background:var(--bg-3);display:grid;place-items:center;font-weight:600;color:var(--accent);font-size:13px;border:1px solid var(--line)}
-  .quote .who{font-size:13px;line-height:1.3}
-  .quote .who .n{font-weight:600;color:var(--fg)}
-  .quote .who .t{color:var(--fg-3);font-size:12.5px}
+  /* ───────── why I built this ───────── */
+  .why-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+  @media(max-width:880px){.why-grid{grid-template-columns:1fr}}
+  .why-quote{background:linear-gradient(180deg,var(--bg-1),var(--bg-2));border:1px solid var(--line);border-radius:var(--rad-xl);padding:36px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:24px}
+  .why-quote::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(0,217,126,.18),transparent 60%);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask-composite:xor;pointer-events:none}
+  .why-quote .body{color:var(--fg-1);font-size:17px;line-height:1.65;flex:1;position:relative;z-index:1}
+  .why-quote .body::before{content:"\201C";font-family:Georgia,serif;font-size:56px;color:var(--accent);line-height:0;display:block;margin-bottom:24px;font-weight:700}
+  .why-quote .body code.ki{background:rgba(0,217,126,.1);padding:2px 7px;border-radius:6px;font-size:13.5px;color:var(--accent-3);border:1px solid rgba(0,217,126,.18)}
+  .why-quote .body a{color:var(--accent);border-bottom:1px solid rgba(0,217,126,.3)}
+  .why-quote .body a:hover{border-bottom-color:var(--accent)}
+  .why-quote .author{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:20px}
+  .why-quote .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#38bdf8);display:grid;place-items:center;font-weight:700;color:#0a0a0a;font-size:15px;border:0}
+  .why-quote .who{font-size:14px;line-height:1.4}
+  .why-quote .who .n{font-weight:600;color:var(--fg);font-size:15px}
+  .why-quote .who .t{color:var(--fg-3);font-size:13px;margin-top:2px}
+  .why-quote .who .t a{color:var(--fg-2)}
+  .why-quote .who .t a:hover{color:var(--accent)}
+
+  .why-side{display:flex;flex-direction:column;gap:14px}
+  .why-card{background:var(--bg-1);border:1px solid var(--line);border-radius:var(--rad);padding:22px;transition:all .2s ease;position:relative}
+  .why-card:hover{border-color:var(--line-2);transform:translateY(-1px)}
+  .why-card .why-num{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:10px}
+  .why-card h4{margin:0 0 6px;font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .why-card p{margin:0;color:var(--fg-2);font-size:14px;line-height:1.55}
 
   /* ───────── faq ───────── */
   .faq{display:flex;flex-direction:column;gap:8px;max-width:780px}
@@ -551,35 +564,41 @@
   </div>
 </section>
 
-<!-- ───── TESTIMONIALS ───── -->
-<section id="quotes">
+<!-- ───── WHY I BUILT THIS ───── -->
+<section id="why">
   <div class="container">
     <div class="reveal">
-      <span class="kicker">From the trenches</span>
-      <h2>Why solo devs use Sprint Agent.</h2>
-      <p class="sub">Built for developers who pair with AI agents daily and ship features without a team.</p>
+      <span class="kicker">Why this exists</span>
+      <h2>Built out of frustration. Open-sourced because<br/>it kept solving the same problem.</h2>
     </div>
 
-    <div class="quotes reveal">
-      <div class="quote">
-        <div class="body">The 30-minute daily forces me to ship one ticket and stop polishing. Claude Code reads <code style="background:rgba(255,255,255,.06);padding:1px 6px;border-radius:5px;font-size:13px;color:var(--accent-3)">AGENT.md</code> and we're working in two minutes flat.</div>
+    <div class="why-grid reveal">
+      <div class="why-quote">
+        <div class="body">I was burning 12 minutes every Claude Code session re-explaining the same project before any actual work happened. <code class="ki">CLAUDE.md</code> alone wasn't enough — I needed structure: backlog, current sprint, what's blocked, what shipped yesterday. So I built one tiny CLI that drops a <code class="ki">.sprint/</code> folder in the repo. After 6 months and 70+ tickets shipping <a href="https://datafrancepro.fr">DataFrancePro</a> with this workflow, it works. Sharing the source.</div>
         <div class="author">
           <div class="av">M</div>
-          <div class="who"><div class="n">Miloud Belarebia</div><div class="t">Founder, DataFrancePro</div></div>
+          <div class="who">
+            <div class="n">Miloud Belarebia</div>
+            <div class="t">Builder · <a href="https://github.com/miloudbelarebia">@miloudbelarebia</a></div>
+          </div>
         </div>
       </div>
-      <div class="quote">
-        <div class="body">CLAUDE.md alone wasn't enough. I needed structure — backlog, sprint, retro. Markdown files solved it. No DB, no UI, just files my agent reads.</div>
-        <div class="author">
-          <div class="av">S</div>
-          <div class="who"><div class="n">Solo dev</div><div class="t">After 6 sprints</div></div>
+
+      <div class="why-side">
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <h4>Markdown beats databases</h4>
+          <p>Files diff in git, open in any editor, survive every tool change. Zero migrations, zero servers.</p>
         </div>
-      </div>
-      <div class="quote">
-        <div class="body">Best part: zero dependencies. One Python file. I can read every line, fork it, and trust nothing weird is running in the background.</div>
-        <div class="author">
-          <div class="av">D</div>
-          <div class="who"><div class="n">Dev who reads source</div><div class="t">Open-source enjoyer</div></div>
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <h4>Designed for solo + AI</h4>
+          <p>Not a team tool. Opinionated 30-min daily, single ticket per session. Trades flexibility for shipping velocity.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <h4>Read every line</h4>
+          <p>Pure Python stdlib. ~700 lines. Single file. Nothing weird running in the background.</p>
         </div>
       </div>
     </div>
